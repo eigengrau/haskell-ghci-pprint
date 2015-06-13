@@ -1,0 +1,24 @@
+-- Install to ~/.ghc/ghci-boot
+
+-- One-shot settings for GHCi. Note that this should not bind any
+-- names. Instead, bindings are sourced from a secondary file which
+-- needs to be re-run after every :load command.
+
+-- Set prompt. The ANSI escapes have to be enclosed within SOH & STX
+-- so that the line editor won’t mess up on long lines.
+:set prompt "\001\ESC[34;1m\002λ>\001\ESC[m\002 "
+:set prompt2 "… "
+
+-- Bootstrap name bindings.
+:source /home/seb/.ghc/ghci-onload
+
+-- This redefines :load so that after adding the file to the target
+-- set, all my standard bindings (including costom interactive print)
+-- are set-up again.
+:def load myLoad
+:def reload myReload
+:def rl myReload
+
+-- Use my custom print function with unescaped unicode literals.
+:set -interactive-print=GHC.GHCi.SR.myPrint
+

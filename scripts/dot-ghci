@@ -1,0 +1,4 @@
+-- Change path below and install or amend to ~/.ghci
+
+:def source readFile
+:source /home/user/.ghc/ghci-boot
